@@ -11,6 +11,17 @@ import { supplyData } from "./data";
 
 
 function Supply() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   function rowStyle(rowData) {
    return rowData.tableData.id % 2 === 0
@@ -34,12 +45,8 @@ function Supply() {
     { title: "App Bundle", field: "app_bundle" },
     { title: "Name", field: "name" },
     { title: "Category", field: "category"},
-    { title: "Premium", field: "premium", align:"center" },
-    {
-      title: "Birth Place",
-      field: "birthCity",
-      lookup: { 34: "İstanbul", 63: "Şanlıurfa" }
-    }
+    { title: "Premium", field: "premium" },
+    { title: "Interstitial", field: "interstitial" }
   ];
 
   const theme = createMuiTheme({
@@ -52,7 +59,7 @@ function Supply() {
       }
     },
     typography: {
-      fontSize: 10
+      fontSize: 16
     }
   });
 
@@ -74,8 +81,8 @@ function Supply() {
       search: false,
       selection: false,
 
-      cellStyle: { padding: "0.3em", fontSize: 10 },
-      headerStyle: { padding: "0.3em", fontSize: 10, position: "sticky" },
+      cellStyle: { padding: "0.3em", fontSize: 12 },
+      headerStyle: { padding: "0.3em", fontSize: 16, position: "sticky" },
       root: {
         "&:nth-child(odd)": {
           backgroundColor: "#fff9e6" //theme.palette.background.default,
@@ -92,7 +99,7 @@ function Supply() {
 
   return (
     <MaterialTable
-    title="Editable Example"
+    title="Mobile In App"
     data={data}
     setData={setData}
     columns={columns}
